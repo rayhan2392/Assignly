@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import logo from '../assets/images/assignLyLogo2-removebg-preview.png'
 
 const Navbar = () => {
 
@@ -28,7 +28,9 @@ const Navbar = () => {
              {navLinks}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">AssignLy</a>
+          
+            <img className="w-[200px] h-[150px]" src={logo} alt="" />
+        
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="font-bold menu menu-horizontal px-1">
