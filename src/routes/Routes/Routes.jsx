@@ -4,6 +4,7 @@ import Home from "../../pages/Home";
 import Assignments from "../../pages/Assignments";
 import CreateAssignments from "../../pages/CreateAssignments";
 import PendingAssignments from "../../pages/PendingAssignments";
+import Register from "../../pages/Register";
 
 
 export const router = createBrowserRouter([
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
         {
             path:'/pendingAssignments',
             element:<PendingAssignments></PendingAssignments>
+        },
+        {
+          path:'/register',
+          element: <Register></Register>
         }
       ]
     },

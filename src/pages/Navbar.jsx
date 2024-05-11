@@ -16,6 +16,9 @@ const Navbar = () => {
       <li>
         <NavLink to='/pendingAssignments'>Pending Assignments </NavLink>
       </li>
+      <li>
+        <NavLink to='/register' >Sign Up</NavLink>
+      </li>
     </>
     return (
         <div className="navbar bg-base-100">
