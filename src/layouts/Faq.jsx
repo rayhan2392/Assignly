@@ -4,7 +4,7 @@ const Faq = () => {
         <h1 className="text-center text-4xl font-bold text-slate-400 mb-5">Frequently Asked Questions</h1>
 
       <div className="collapse collapse-arrow bg-base-200 mb-3">
-        <input type="radio" name="my-accordion-2" defaultChecked />
+        <input type="radio" name="my-accordion-2"/>
         <div className="collapse-title text-xl font-medium">
         How do I create a new assignment?
         </div>
