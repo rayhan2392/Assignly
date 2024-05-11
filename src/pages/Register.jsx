@@ -1,9 +1,15 @@
+import Swal from "sweetalert2";
 import useAuth from "../customHooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Register = () => {
     const {createUser} = useAuth();
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location?.state || '/';
 
     const handleSignUp = e=>{
+       
         e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -15,6 +21,16 @@ const Register = () => {
         createUser(email,password)
         .then(result =>{
             console.log(result.user)
+            if(result.user){
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Registration Successful",
+                  showConfirmButton: false,
+                  timer: 2000
+                });
+                navigate(from)
+              }
         })
         .catch(error=>{
             console.log(error)
