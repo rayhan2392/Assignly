@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { createContext } from "react";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createContext, useEffect, useState } from "react";
 import auth from "../firbase/firebase.config";
 
 export const AuthContext = createContext(null)
 const AuthProvider = ({children}) => {
+    const [user,setUser]=useState(null);
+    const [loading,setLoading]=useState(true)
     //create a new user with firbase authentication
     const createUser = (email,password)=>{
       return  createUserWithEmailAndPassword(auth,email,password);
@@ -17,10 +19,24 @@ const AuthProvider = ({children}) => {
     const logOutUser = ()=>{
       return  signOut(auth);
     }
+
+   //track an user
+   useEffect(()=>{
+    const unSubscribe = onAuthStateChanged(auth, currentUser =>{
+        setUser(currentUser)
+        setLoading(false)
+    })
+    return ()=> {
+        unSubscribe();
+    }
+},[])
+
   const AuthInfo ={
     createUser,
     logInUser,
-    logOutUser
+    logOutUser,
+    user,
+    loading
   }
 
     return (
