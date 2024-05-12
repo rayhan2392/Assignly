@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createContext } from "react";
 import auth from "../firbase/firebase.config";
 
@@ -13,9 +13,14 @@ const AuthProvider = ({children}) => {
     const logInUser =(email,password)=>{
         return signInWithEmailAndPassword(auth,email,password);
     }
+    //log out an user
+    const logOutUser = ()=>{
+      return  signOut(auth);
+    }
   const AuthInfo ={
     createUser,
-    logInUser
+    logInUser,
+    logOutUser
   }
 
     return (

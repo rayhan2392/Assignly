@@ -1,8 +1,13 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../customHooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const Login = () => {
     const {logInUser} = useAuth();
+    const location = useLocation()
+    const navigate = useNavigate()
+    const from = location?.state || '/';
     const handleLogIn = e=>{
         e.preventDefault();
         const form = e.target;
@@ -14,6 +19,16 @@ const Login = () => {
         logInUser(email,password)
         .then(result=>{
             console.log(result.user)
+            if(result.user){
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Registration Successful",
+                  showConfirmButton: false,
+                  timer: 2000
+                });
+                navigate(from)
+              }
         })
         .catch(error=>{
             console.log(error)
