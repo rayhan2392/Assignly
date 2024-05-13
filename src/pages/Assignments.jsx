@@ -1,11 +1,89 @@
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
+import useAuth from "../customHooks/useAuth";
 
 
 const Assignments = () => {
-    return (
-        <div>
-            <h1>This is all assignment page</h1>
+    const {user}= useAuth();
+    const [assignments,setAssignments]=useState([]);
+    const handleDelete = (id,email)=>{
+       console.log(email)
+        console.log(id)
+        if(user.email===email){
+            return alert('no access')
+        }
+        else{
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`http://localhost:5000/assignments/${id}`,{
+                        method: 'DELETE'
+                       })
+                       .then(res=>res.json())
+                       .then(data=>{
+                        if(data.deletedCount>0){
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your travel data has been deleted.",
+                                icon: "success"
+                              });
+                        }
+                       })
+                 const remaining = assignments.filter(assignment=>assignment._id==!id)
+                 setAssignments(remaining);
+                }
+              });
+        }
+       
+       
+    }
+    
+   
+  useEffect(()=>{
+    fetch('http://localhost:5000/assignments')
+    .then(res=>res.json())
+    .then(data=>setAssignments(data))
+  },[])
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+        
+       
+     {
+        assignments.map(assignment=>  <div key={assignment._id} className=" bg-gray-300  mx-auto p-4 md:p-10 shadow-xl rounded-xl">
+        <div className="md:flex">
+          <div className="flex-1 md:p-4">
+            <img
+              className="h-[200px] w-[300px] rounded-xl"
+              src={assignment.img}
+              alt=""
+            />
+          </div>
+          <div className="flex-1 md:p-4 space-y-4">
+            <h1 className="text-2xl font-bold">{assignment.title}</h1>
+            <p className="font-bold">Marks:{assignment.marks}</p>
+            <p className="font-bold">Difficulty: {assignment.difficulty}</p>
+          </div>
         </div>
-    );
+
+        <div className="flex justify-evenly">
+          <button onClick={()=>handleDelete(assignment._id,assignment.email)} className="btn bg-red-600 text-white">Delete</button>
+          <button className="btn bg-green-500 text-white">Update</button>
+          <button className="btn bg-blue-500 text-white">View Assignment</button>
+        </div>
+      </div>)
+     }
+
+      
+    </div>
+  );
 };
 
 export default Assignments;

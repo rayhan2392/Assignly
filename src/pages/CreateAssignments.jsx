@@ -1,9 +1,15 @@
-import { useState } from "react";
+import {  useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useAuth from "../customHooks/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
+import { data } from "autoprefixer";
 
 const CreateAssignments = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
+  const navigate = useNavigate();
+    const {user} = useAuth();
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
@@ -15,10 +21,31 @@ const CreateAssignments = () => {
     const difficulty = form.difficulty.value;
     const marks = form.marks.value;
     const img = form.img.value;
+    const email = user.email
     // const date = form.date.value;
     const description = form.description.value;
-    const assignment = { title, difficulty, marks, description, img,selectedDate };
-    console.log(assignment);
+    const assignment = { title, difficulty, marks, description, img,selectedDate, email};
+  
+   fetch('http://localhost:5000/assignments',{
+    method:'POST',
+    headers:{
+        'content-type':'application/json'
+    },
+    body:JSON.stringify(assignment)
+   })
+   .then(res=>res.json())
+   .then(data=>console.log(data))
+   if(data){
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: "Assignment created successfully",
+      showConfirmButton: false,
+      timer: 2000
+    });
+  navigate('/assignments')
+   }
+
   };
   return (
     <div>
@@ -60,7 +87,7 @@ const CreateAssignments = () => {
                 placeholder="Total Marks"
                 className="input input-bordered w-full "
               />
-              <DatePicker className="input input-bordered w-full"
+              <DatePicker readOnly className="input input-bordered w-full"
                 selected={selectedDate}
                 onChange={handleDateChange}
                 dateFormat="dd/MM/yyyy"
