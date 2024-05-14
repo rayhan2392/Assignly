@@ -9,13 +9,14 @@ const SubmitAssignment = () => {
     const {user} =useAuth();
     const email = user.email
     const {title,marks}=assignment;
+    const status = 'pending'
 
     const handleAssignmentSubmit =(e)=>{
         e.preventDefault();
         const form =e.target;
         const doc = form.doc.value;
         const note = form.note.value;
-        const submittedAssignment ={doc,note,title,marks,email}
+        const submittedAssignment ={doc,note,title,marks,email,status}
         console.log(submittedAssignment)
 //send the submitted assignment to the server and database
   fetch('http://localhost:5000/submittedAssignments',{
