@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 const PendingAssignments = () => {
   const pendingAssignments = useLoaderData();
+  const assignments =pendingAssignments.filter(assignment=>assignment.status==='pending');
+  console.log(assignments);
   return (
     <div>
       <h1 className="text-center font-bold text-2xl">
@@ -24,7 +26,7 @@ const PendingAssignments = () => {
             <tbody>
               {/* row 1 */}
              {
-                pendingAssignments.map(assignment=> <tr key={assignment._id}>
+                assignments.map(assignment=> <tr key={assignment._id}>
                     <td>{assignment.email}</td>
                     <td>{assignment.title}</td>
                     <td>{assignment.marks}</td>

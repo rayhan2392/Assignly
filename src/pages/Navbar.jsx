@@ -87,10 +87,12 @@ const Navbar = () => {
 
          {
           open && 
-           <div className="bg-white w-52 p-4 shadow-lg rounded-sm absolute z-10 ">
+           <div className="bg-white -left-10 w-52 p-4 shadow-lg rounded-sm absolute z-10 ">
           <ul>
              <li onClick={handleClickLogOut} className="p-2 font-bold cursor-pointer hover:bg-blue-100">Log Out</li>
-             <li onClick={()=>setOpen(false)} className="p-2 font-bold cursor-pointer hover:bg-blue-100">Attempted Assignments</li>
+             <li onClick={()=>setOpen(false)} className="p-2 font-bold cursor-pointer hover:bg-blue-100">
+              <Link to='/myAssignments'>My Assignments</Link>
+            </li>
           </ul>
        </div>
          }
