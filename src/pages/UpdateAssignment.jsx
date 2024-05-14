@@ -1,7 +1,8 @@
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const UpdateAssignment = () => {
+    const navigate = useNavigate()
 const currentAssignment = useLoaderData();
 const {title,marks,img,description,_id} =currentAssignment;
 const handleUpdateAssignment =(e)=>{
@@ -35,6 +36,7 @@ const handleUpdateAssignment =(e)=>{
               showConfirmButton: false,
               timer: 2000
             });
+         navigate('/assignments');
           }
     })
 }

@@ -12,7 +12,7 @@ const Assignments = () => {
     const handleDelete = (id,email)=>{
        console.log(email)
         console.log(id)
-        if(user.email===email){
+        if(user.email==!email){
             return alert('no access')
         }
         else{
@@ -81,7 +81,9 @@ const Assignments = () => {
          <Link to={`/updateAssignment/${assignment._id}`}>
           <button className="btn bg-green-500 text-white">Update</button>
          </Link>
+         <Link to={`/assignmentsDetails/${assignment._id}`}>
           <button className="btn bg-blue-500 text-white">View Assignment</button>
+         </Link>
         </div>
       </div>)
      }
