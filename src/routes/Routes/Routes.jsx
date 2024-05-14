@@ -37,7 +37,8 @@ export const router = createBrowserRouter([
         },
         {
           path:'/myAssignments',
-          element:<MyAssignments></MyAssignments>
+          element:<MyAssignments></MyAssignments>,
+          loader:()=>fetch('http://localhost:5000/submittedAssignments')
         },
         {
           path:'/register',
