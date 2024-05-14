@@ -12,10 +12,9 @@ const Assess = () => {
         const feedback =form.feedback.value;
         const status ='confirmed'
         const markedAssignment = {obtainedMark,feedback,status}
-        console.log(markedAssignment)
 
         //send assessment data to the database
-        fetch(`http://localhost:5000/submittedAssignments/${_id}`,{
+        fetch(`https://assign-ly-server.vercel.app/submittedAssignments/${_id}`,{
             method:'PUT',
             headers:{
                 'content-type':'application/json'
@@ -24,7 +23,6 @@ const Assess = () => {
         })
         .then(res=>res.json())
         .then(data=>{
-            console.log(data)
             if(data.modifiedCount>0){
                 Swal.fire({
                   position: "top-end",

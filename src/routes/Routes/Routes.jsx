@@ -11,6 +11,7 @@ import AssignmentDetails from "../../pages/AssignmentDetails";
 import SubmitAssignment from "../../pages/SubmitAssignment";
 import Assess from "../../pages/Assess";
 import MyAssignments from "../../pages/MyAssignments";
+import PrivateRoute from "../PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -28,17 +29,17 @@ export const router = createBrowserRouter([
         },
         {
             path:'/createAssignment',
-            element:<CreateAssignments></CreateAssignments>
+            element:<PrivateRoute><CreateAssignments></CreateAssignments></PrivateRoute>
         },
         {
             path:'/pendingAssignments',
-            element:<PendingAssignments></PendingAssignments>,
-            loader:()=>fetch('http://localhost:5000/submittedAssignments')
+            element:<PrivateRoute><PendingAssignments></PendingAssignments></PrivateRoute>,
+            loader:()=>fetch('https://assign-ly-server.vercel.app/submittedAssignments')
         },
         {
           path:'/myAssignments',
-          element:<MyAssignments></MyAssignments>,
-          loader:()=>fetch('http://localhost:5000/submittedAssignments')
+          element:<PrivateRoute><MyAssignments></MyAssignments></PrivateRoute>,
+          loader:()=>fetch('https://assign-ly-server.vercel.app/submittedAssignments')
         },
         {
           path:'/register',
@@ -50,24 +51,24 @@ export const router = createBrowserRouter([
         },
         {
           path:'/updateAssignment/:id',
-          element:<UpdateAssignment></UpdateAssignment>,
-          loader:({params})=>fetch(`http://localhost:5000/assignments/${params.id}`)
+          element:<PrivateRoute><UpdateAssignment></UpdateAssignment></PrivateRoute>,
+          loader:({params})=>fetch(`https://assign-ly-server.vercel.app/assignments/${params.id}`)
         },
         {
           path:'/assignmentsDetails/:id',
-          element:<AssignmentDetails></AssignmentDetails>,
-          loader:({params})=>fetch(`http://localhost:5000/assignments/${params.id}`)
+          element:<PrivateRoute><AssignmentDetails></AssignmentDetails></PrivateRoute>,
+          loader:({params})=>fetch(`https://assign-ly-server.vercel.app/assignments/${params.id}`)
 
         },
         {
           path:'/submitAssignment/:id',
           element:<SubmitAssignment></SubmitAssignment>,
-          loader:({params})=>fetch(`http://localhost:5000/assignments/${params.id}`)
+          loader:({params})=>fetch(`https://assign-ly-server.vercel.app/assignments/${params.id}`)
         },
         {
           path:'/asses/:id',
           element:<Assess></Assess>,
-          loader:({params})=>fetch(`http://localhost:5000/submittedAssignments/${params.id}`)
+          loader:({params})=>fetch(`https://assign-ly-server.vercel.app/submittedAssignments/${params.id}`)
         }
       ]
     },

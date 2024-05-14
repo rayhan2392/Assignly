@@ -12,15 +12,12 @@ const Register = () => {
        
         e.preventDefault();
         const form = e.target;
-        const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        const user = {name,email,password}
-        console.log(user)
+       
         //create a new user with firebase auth
         createUser(email,password)
         .then(result =>{
-            console.log(result.user)
             if(result.user){
                 Swal.fire({
                   position: "top-end",

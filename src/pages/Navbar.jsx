@@ -19,7 +19,6 @@ const Navbar = () => {
   }
  
   
-  console.log(user);
   const navLinks = (
     <>
       <li>

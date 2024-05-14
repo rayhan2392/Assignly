@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const PendingAssignments = () => {
   const pendingAssignments = useLoaderData();
   const assignments =pendingAssignments.filter(assignment=>assignment.status==='pending');
-  console.log(assignments);
   return (
     <div>
       <h1 className="text-center font-bold text-2xl">

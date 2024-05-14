@@ -26,7 +26,7 @@ const CreateAssignments = () => {
     const description = form.description.value;
     const assignment = { title, difficulty, marks, description, img,selectedDate, email};
   
-   fetch('http://localhost:5000/assignments',{
+   fetch('https://assign-ly-server.vercel.app/assignments',{
     method:'POST',
     headers:{
         'content-type':'application/json'

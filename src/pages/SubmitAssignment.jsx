@@ -17,9 +17,8 @@ const SubmitAssignment = () => {
         const doc = form.doc.value;
         const note = form.note.value;
         const submittedAssignment ={doc,note,title,marks,email,status}
-        console.log(submittedAssignment)
 //send the submitted assignment to the server and database
-  fetch('http://localhost:5000/submittedAssignments',{
+  fetch('https://assign-ly-server.vercel.app/submittedAssignments',{
     method:'POST',
     headers:{
         'content-type':'application/json'
@@ -28,7 +27,6 @@ const SubmitAssignment = () => {
   })
   .then(res=>res.json())
   .then(data=>{
-    console.log(data)
     if(data){
         Swal.fire({
             position: "top-end",

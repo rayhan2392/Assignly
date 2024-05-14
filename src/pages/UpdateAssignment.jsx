@@ -15,10 +15,9 @@ const handleUpdateAssignment =(e)=>{
   
    
     const updatedAssignment = { title,  marks, description, img};
-    console.log(updatedAssignment)
 
     //send updated data to server and database
-    fetch(`http://localhost:5000/assignments/${_id}`,{
+    fetch(`https://assign-ly-server.vercel.app/assignments/${_id}`,{
         method:'PUT',
         headers:{
             'content-type':'application/json'
@@ -27,7 +26,6 @@ const handleUpdateAssignment =(e)=>{
     })
     .then(res=>res.json())
     .then(data=>{
-        console.log(data)
         if(data.modifiedCount>0){
             Swal.fire({
               position: "top-end",

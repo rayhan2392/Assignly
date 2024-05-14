@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const AssignmentDetails = () => {
   const assignment = useLoaderData();
   const { title, marks, img, difficulty, selectedDate, description,_id } =assignment;
-  console.log(assignment);
   return (
     <div className="">
         <h1 className="text-center text-2xl font-bold ">Assignment Detail Page</h1>

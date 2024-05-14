@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../customHooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Assignments = () => {
+    const navigate = useNavigate()
     const {user}= useAuth();
     const [assignments,setAssignments]=useState([]);
 
     // delete a single assignment data
     const handleDelete = (id,email)=>{
-       console.log(email)
-        console.log(id)
+        if(!user){
+          return navigate('/login');
+        }
         if(user.email==!email){
             return alert('no access')
         }
@@ -26,7 +28,7 @@ const Assignments = () => {
                 confirmButtonText: "Yes, delete it!"
               }).then((result) => {
                 if (result.isConfirmed) {
-                    fetch(`http://localhost:5000/assignments/${id}`,{
+                    fetch(`https://assign-ly-server.vercel.app/assignments/${id}`,{
                         method: 'DELETE'
                        })
                        .then(res=>res.json())
@@ -50,7 +52,7 @@ const Assignments = () => {
     
    //load all assignments data
   useEffect(()=>{
-    fetch('http://localhost:5000/assignments')
+    fetch('https://assign-ly-server.vercel.app/assignments')
     .then(res=>res.json())
     .then(data=>setAssignments(data))
   },[])
