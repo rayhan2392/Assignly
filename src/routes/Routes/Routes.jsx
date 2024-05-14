@@ -6,6 +6,7 @@ import CreateAssignments from "../../pages/CreateAssignments";
 import PendingAssignments from "../../pages/PendingAssignments";
 import Register from "../../pages/Register";
 import Login from "../../pages/Login";
+import UpdateAssignment from "../../pages/UpdateAssignment";
 
 
 export const router = createBrowserRouter([
@@ -36,6 +37,11 @@ export const router = createBrowserRouter([
         {
           path:'/login',
           element:<Login></Login>
+        },
+        {
+          path:'/updateAssignment/:id',
+          element:<UpdateAssignment></UpdateAssignment>,
+          loader:({params})=>fetch(`http://localhost:5000/assignments/${params.id}`)
         }
       ]
     },

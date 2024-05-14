@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAuth from "../customHooks/useAuth";
+import { Link } from "react-router-dom";
 
 
 const Assignments = () => {
     const {user}= useAuth();
     const [assignments,setAssignments]=useState([]);
+
+    // delete a single assignment data
     const handleDelete = (id,email)=>{
        console.log(email)
         console.log(id)
@@ -45,7 +48,7 @@ const Assignments = () => {
        
     }
     
-   
+   //load all assignments data
   useEffect(()=>{
     fetch('http://localhost:5000/assignments')
     .then(res=>res.json())
@@ -75,7 +78,9 @@ const Assignments = () => {
 
         <div className="flex justify-evenly">
           <button onClick={()=>handleDelete(assignment._id,assignment.email)} className="btn bg-red-600 text-white">Delete</button>
+         <Link to={`/updateAssignment/${assignment._id}`}>
           <button className="btn bg-green-500 text-white">Update</button>
+         </Link>
           <button className="btn bg-blue-500 text-white">View Assignment</button>
         </div>
       </div>)
