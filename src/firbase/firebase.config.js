@@ -6,13 +6,6 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-//   apiKey: "AIzaSyAzKyynuJUlvhxsk9B3qylJddpnpgQ5aLw",
-//   authDomain: "assignly-client.firebaseapp.com",
-//   projectId: "assignly-client",
-//   storageBucket: "assignly-client.appspot.com",
-//   messagingSenderId: "1073398709728",
-//   appId: "1:1073398709728:web:fd47fb6a467eab7891bf85"
-
   apiKey:import.meta.env.VITE_apiKey,
   authDomain:import.meta.env.VITE_authDomain,
   projectId:import.meta.env.VITE_projectId,
